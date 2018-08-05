@@ -8,14 +8,21 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 
-const testReducer = (state = {}, action) => {
-    console.log('test reducer');
-    return state;
+const storeFeedback = (state = {}, action) => {
+    switch(action.type) {
+        case 'ADD_FEEDBACK':
+            return {
+                ...state,
+                feedback: action.payload
+            };
+        default:
+            return state;
+    }
 }
 
 const storeInstance = createStore(
     combineReducers({
-        testReducer
+        storeFeedback
     }),
     applyMiddleware(logger)
 );
