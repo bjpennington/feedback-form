@@ -4,13 +4,12 @@ import axios from 'axios';
 class AdminItemRow extends Component {
 
     confirmDelete = () => {
-        if(window.confirm('Are you sure you want to delete this feedback?')) {
+        if(window.confirm('Are you sure you want to delete this feedback? This cannot be undone.')) {
             this.deleteFeedback(this.props.feedback.id);
         }
     }
 
     deleteFeedback = (id) => {
-        console.log(this.props.feedback.id);
         axios.delete(`/api/feedback/${id}`)
             .then(response => {
                 this.props.getFeedback();
