@@ -29,7 +29,7 @@ class AdminTable extends Component {
     render() {
         let feedbackMapArray = this.state.feedback.map((feedback, index) => {
             return (
-                <AdminItemRow feedback={feedback} key={index} />
+                <AdminItemRow feedback={feedback} key={index} getFeedback={this.getFeedback} />
             )
         })
 
