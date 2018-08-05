@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AdminItemRow from '../AdminItemRow/AdminItemRow';
 
 class AdminTable extends Component {
     constructor(props) {
@@ -28,25 +29,7 @@ class AdminTable extends Component {
     render() {
         let feedbackMapArray = this.state.feedback.map((feedback, index) => {
             return (
-                <tr key={index}>
-                    <td>
-                        {feedback.feeling}
-                    </td>
-                    <td>
-                        {feedback.understanding}
-                    </td>
-                    <td>
-                        {feedback.support}
-                    </td>
-                    <td>
-                        {feedback.comments}
-                    </td>
-                    <td>
-                        <button>
-                            Delete
-                    </button>
-                    </td>
-                </tr>
+                <AdminItemRow feedback={feedback} key={index} />
             )
         })
 
