@@ -5,11 +5,18 @@ import { connect } from 'react-redux';
 class FeedbackComments extends Component {
     constructor(props) {
         super(props);
-        this.state = {comments: ''}
+        this.state = {
+            feeling: this.props.feedback.feeling,
+            understanding: this.props.feedback.understanding,
+            support: this.props.feedback.support,
+            comments: ''
+        }
     }
 
     postFeedback = () => {
-        axios.post('/api/feedback', this.props.feedback)
+        console.log(this.state);
+        
+        axios.post('/api/feedback', this.state)
             .then(results => {
                 this.props.history.push('/feedback_submitted');
             })
@@ -25,10 +32,10 @@ class FeedbackComments extends Component {
     }
 
     passFeedback = () => {
-        this.props.dispatch({
-            type: 'ADD_COMMENTS',
-            payload: this.state
-        });
+        // this.props.dispatch({
+        //     type: 'ADD_COMMENTS',
+        //     payload: this.state
+        // });
         this.postFeedback();
     }
 
