@@ -4,5 +4,57 @@ import './index.css';
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+
+const storeFeedback = (state = {}, action) => {
+    switch (action.type) {
+        case 'RESET_FEEDBACK':
+            return {};
+        case 'ADD_FEEDBACK':
+            let newFeedback = action.payload;
+            return {
+                ...state,
+                newFeedback
+            };
+        default:
+            return state;
+    }
+}
+
+const pageData = (state = {}, action) => {
+    switch (action.type) {
+        case 1:
+            return {
+                question: 'How are you feeling today?',
+                pageCount: 1,
+                property: 'feeling',
+            };
+        case 2:
+            return {
+                question: 'How well are you understanding the content?',
+                pageCount: 2,
+                property: 'understanding',
+            };
+        case 3:
+            return {
+                question: 'How well are you being supported?',
+                pageCount: 3,
+                property: 'support',
+            };
+        default:
+            return state;
+    }
+}
+
+const storeInstance = createStore(
+    combineReducers({
+        storeFeedback,
+        pageData
+    }),
+    applyMiddleware(logger)
+);
+
+ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
