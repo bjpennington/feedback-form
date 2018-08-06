@@ -10,21 +10,6 @@ import logger from 'redux-logger';
 
 const storeFeedback = (state = {}, action) => {
     switch (action.type) {
-        case 'ADD_FEELING':
-            return {
-                ...state,
-                feeling: action.payload.feeling
-            };
-        case 'ADD_UNDERSTANDING':
-            return {
-                ...state,
-                understanding: action.payload.understanding
-            };
-        case 'ADD_SUPPORT':
-            return {
-                ...state,
-                support: action.payload.support
-            };
         case 'RESET_FEEDBACK':
             return {};
         case 'ADD_FEEDBACK':
@@ -32,14 +17,13 @@ const storeFeedback = (state = {}, action) => {
             return {
                 ...state,
                 newFeedback
-            }
-                ;
+            };
         default:
             return state;
     }
 }
 
-const pageData = (state, action) => {
+const pageData = (state = {}, action) => {
     switch (action.type) {
         case 1:
             return {
@@ -60,11 +44,7 @@ const pageData = (state, action) => {
                 property: 'support',
             };
         default:
-            return {
-                question: '',
-                pageCount: 0,
-                property: '',
-            }
+            return state;
     }
 }
 

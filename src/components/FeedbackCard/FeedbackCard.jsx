@@ -48,7 +48,6 @@ class FeedbackCard extends Component {
                 <div>
                     <p>{this.props.pageData.question}</p>
                     <select value={this.state} onChange={this.handleChangeFor(this.props.pageData.property)}>
-                        {/* <option selected disabled value=''></option> */}
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
