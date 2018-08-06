@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class FeedbackSupport extends Component {
     constructor(props) {
         super(props);
-        this.state = {support: "1"}
+        this.state = { support: "1" }
     }
 
     handleChangeForSelect = (event) => {

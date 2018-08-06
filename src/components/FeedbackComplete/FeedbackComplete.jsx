@@ -11,7 +11,7 @@ class FeedbackComplete extends Component {
     }
 
     render() {
-        return(
+        return (
             <div>
                 <h2>Thank You!</h2>
                 <button onClick={this.startNewFeedback}>Leave New Feedback</button>

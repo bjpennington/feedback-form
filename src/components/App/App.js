@@ -6,7 +6,7 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
 import Header from '../Header/Header';
 import AdminTable from '../AdminTable/AdminTable';
-// import FeedbackCard from '../FeedbackCard/FeedbackCard';
+import FeedbackCard from '../FeedbackCard/FeedbackCard';
 import NotFound from '../NotFound/NotFound';
 import FeedbackFeeling from '../FeedbackFeeling/FeedbackFeeling';
 import FeedbackUnderstanding from '../FeedbackUnderstanding/FeedbackUnderstanding';
@@ -25,9 +25,10 @@ class App extends Component {
             <Route path="/feedback_pg_1" component={FeedbackFeeling} />
             <Route path="/feedback_pg_2" component={FeedbackUnderstanding} />
             <Route path="/feedback_pg_3" component={FeedbackSupport} />
-            <Route path="/feedback_pg_4" component={FeedbackComments} />
+            <Route path="/feedback/4" component={FeedbackComments} />
             <Route path="/feedback_submitted" component={FeedbackComplete} />
-            <Redirect exact from="/" to="/feedback_pg_1" />
+            <Route path="/feedback/:id" component={FeedbackCard} />
+            <Redirect exact from="/" to="/feedback/1" />
             <Route component={NotFound} />
           </Switch>
         </Router>

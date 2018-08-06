@@ -6,16 +6,14 @@ class FeedbackComments extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            feeling: this.props.feedback.feeling,
-            understanding: this.props.feedback.understanding,
-            support: this.props.feedback.support,
+            feeling: this.props.feedback.newFeedback.feeling,
+            understanding: this.props.feedback.newFeedback.understanding,
+            support: this.props.feedback.newFeedback.support,
             comments: ''
         }
     }
 
     postFeedback = () => {
-        console.log(this.state);
-        
         axios.post('/api/feedback', this.state)
             .then(results => {
                 this.props.history.push('/feedback_submitted');
@@ -31,14 +29,6 @@ class FeedbackComments extends Component {
         })
     }
 
-    passFeedback = () => {
-        // this.props.dispatch({
-        //     type: 'ADD_COMMENTS',
-        //     payload: this.state
-        // });
-        this.postFeedback();
-    }
-
     render() {
         return (
             <div>
@@ -50,7 +40,7 @@ class FeedbackComments extends Component {
                     <input type="text" onChange={this.handleChangeForSelect} />
                 </div>
                 <div>
-                    <button onClick={this.passFeedback}>
+                    <button onClick={this.postFeedback}>
                         Submit
                     </button>
                 </div>

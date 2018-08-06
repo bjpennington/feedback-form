@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 
 class AdminItemRow extends Component {
 
     confirmDelete = () => {
-        if(window.confirm('Are you sure you want to delete this feedback? This cannot be undone.')) {
+        if (window.confirm('Are you sure you want to delete this feedback? This cannot be undone.')) {
             this.deleteFeedback(this.props.feedback.id);
         }
     }

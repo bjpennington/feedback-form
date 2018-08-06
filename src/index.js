@@ -25,21 +25,53 @@ const storeFeedback = (state = {}, action) => {
                 ...state,
                 support: action.payload.support
             };
-        case 'ADD_COMMENTS':
+        case 'RESET_FEEDBACK':
+            return {};
+        case 'ADD_FEEDBACK':
+            let newFeedback = action.payload;
             return {
                 ...state,
-                comments: action.payload.comments
-            };
-        case 'RESET_FEEDBACK':
-            return {}
+                newFeedback
+            }
+                ;
         default:
             return state;
     }
 }
 
+const pageData = (state, action) => {
+    switch (action.type) {
+        case 1:
+            return {
+                question: 'How are you feeling today?',
+                pageCount: 1,
+                property: 'feeling',
+            };
+        case 2:
+            return {
+                question: 'How well are you understanding the content?',
+                pageCount: 2,
+                property: 'understanding',
+            };
+        case 3:
+            return {
+                question: 'How well are you being supported?',
+                pageCount: 3,
+                property: 'support',
+            };
+        default:
+            return {
+                question: '',
+                pageCount: 0,
+                property: '',
+            }
+    }
+}
+
 const storeInstance = createStore(
     combineReducers({
-        storeFeedback
+        storeFeedback,
+        pageData
     }),
     applyMiddleware(logger)
 );

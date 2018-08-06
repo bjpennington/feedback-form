@@ -1,25 +1,41 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class FeedbackCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            understanding: ''
+            feeling: "1",
+            understanding: "1",
+            support: "1"
         }
     }
 
-    handleChangeForSelect = (event) => {
-        this.setState({
-            understanding: event.target.value
+    handleChangeFor = (propertyName) => {
+        return ((event) => {
+            this.setState({
+                [propertyName]: event.target.value
+            })
         })
     }
 
     passFeedback = () => {
+        let nextPage = this.props.pageData.pageCount + 1;
         this.props.dispatch({
             type: 'ADD_FEEDBACK',
             payload: this.state
-        })
+        });
+        this.props.dispatch({
+            type: nextPage
+        });
+        this.props.history.push(`/feedback/${nextPage}`);
+
+    }
+
+    componentDidMount = () => {
+        this.props.dispatch({
+            type: parseInt(this.props.match.params.id, 10)
+        });
     }
 
 
@@ -27,11 +43,12 @@ class FeedbackCard extends Component {
         return (
             <div>
                 <div>
-                    <p>2 of 4</p>
+                    <p>{this.props.pageData.pageCount} of 4</p>
                 </div>
                 <div>
-                    <p id="understanding">How well are you understanding the content?</p>
-                    <select onChange={this.handleChangeForSelect}>
+                    <p>{this.props.pageData.question}</p>
+                    <select value={this.state} onChange={this.handleChangeFor(this.props.pageData.property)}>
+                        {/* <option selected disabled value=''></option> */}
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -50,4 +67,8 @@ class FeedbackCard extends Component {
 
 }
 
-export default connect()(FeedbackCard);
+const mapStateToProps = (state) => {
+    return { pageData: state.pageData }
+}
+
+export default connect(mapStateToProps)(FeedbackCard);
